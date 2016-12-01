@@ -43,7 +43,8 @@ private static class Appdata {
 
 		  
   public String getIp() {
-    return ip;
+	
+		return ip;
   }
   public void setIp(String ip) {
 	    this.ip=ip;
@@ -107,12 +108,28 @@ if (operation == null) {
 			application.setAttribute("applist" , applist);
 			out.println("SUCCESS");
 		}
+	}else if (operation.equals("addip")  ) {
+	
+	String ip=request.getParameter("ip");
+	
+	if (null == ip){
+		 out.println("ERROR:Add ip requires IP parameter");
+		 return;
+		}else{
+			if(null == appdata.getIp())
+				appdata.setIp(ip);
+			else
+				appdata.setIp(appdata.getIp() + "," + ip );
+			
+			application.setAttribute("applist" , applist);
+			out.println("SUCCESS");
+		}
 	}else if (operation.equals("getip")  ) {
 		
 	
 		
 		
-				 out.println(appdata.getIp());
+				 out.println(appdata.getIp() );
 			
 		
 		}
